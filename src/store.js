@@ -14,6 +14,7 @@ export default new Vuex.Store({
     
     barColor: '#272727',
     lang:'ar',
+    drawer: null,
     role:'',
     idToken: localStorage.getItem('tokinn'),
     AdminInfo:{
@@ -33,6 +34,9 @@ export default new Vuex.Store({
   ],
   mutations: {
   
+    SET_DRAWER(state, payload) {
+      state.drawer = payload
+    },
     UpdateLang(state, UpdateLang) {
       state.lang= UpdateLang.lang
     },

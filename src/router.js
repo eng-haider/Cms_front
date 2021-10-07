@@ -41,9 +41,16 @@ const router = new Router({
         },   
         children: [
           {
+            //profile
             name: 'statistics',
             path: '',
             component: () => import('@/views/dashboard/Dashboard')
+          },
+
+          {
+            name: 'Profile',
+            path: 'profile',
+            component: () => import('@/views/dashboard/profile')
           },
         ]   
       },

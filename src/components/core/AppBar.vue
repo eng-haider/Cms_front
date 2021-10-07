@@ -1,9 +1,24 @@
 <template>
   <div>
     <v-app-bar color="#f5f5f5" dense dark absolute app   style="width: auto"
-      small>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+v-bind="$attrs"
 
+      small>
+      <v-btn
+      fab
+      small
+      color="#000"
+      text
+      @click="
+        setDrawer(!drawer)
+      "
+    >
+      <v-icon v-if="drawer">mdi-view-quilt</v-icon>
+      <v-icon v-else>mdi-dots-vertical</v-icon>
+      
+    </v-btn>
+
+ 
       <v-toolbar-title style="color:red">{{$t($route.name)}}</v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -57,7 +72,18 @@
 
 <script>
 import Vue from 'vue'
+import { mapState, mapMutations } from "vuex";
   export default {
+    props: {
+    value: {
+      type: Boolean,
+      default: false,
+    },
+  },
+   computed: {
+    ...mapState(["drawer"]),
+  },
+
     data() {
       return {
 
@@ -67,7 +93,7 @@ import Vue from 'vue'
             text: this.$t('AppBar.profile'),
              icon: 'mdi-account',
             to: {
-              path: "Profile",
+              name: "Profile",
             },
           },
           {
@@ -98,6 +124,9 @@ import Vue from 'vue'
 
 
     methods: {
+        ...mapMutations({
+      setDrawer: "SET_DRAWER",
+    }),
       reColor() {
         localStorage.setItem("darkMode", !this.$vuetify.theme.dark);
         this.$vuetify.theme.dark = !this.$vuetify.theme.dark
